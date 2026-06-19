@@ -13,7 +13,7 @@ import aiohttp
 
 logger = logging.getLogger(__name__)
 
-CURRENT_VERSION = "2.0.0"
+CURRENT_VERSION = "0.0.1"
 
 
 async def check_for_update(repository_api_url: str) -> str | None:

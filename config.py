@@ -40,7 +40,7 @@ class Settings(BaseSettings):
     dev_mode: bool = Field(default=False)
     update_check: bool = Field(default=True)
     repository_url: str = Field(
-        default="https://api.github.com/repos/HandledQuest/SimpleMusicBot"
+        default="https://github.com/HandledQuest/SMB-AI-Edited"
     )
     log_level: str = Field(default="INFO")
 
