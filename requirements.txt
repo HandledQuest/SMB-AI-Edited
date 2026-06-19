@@ -1,0 +1,11 @@
+py-cord[voice]==2.8.0
+yt-dlp>=2024.1.0
+pydantic==2.*
+pydantic-settings==2.*
+lyricsgenius==3.*
+python-dotenv==1.*
+aiohttp>=3.9.0
+
+# 開発・テスト用
+pytest==9.*
+pytest-asyncio==1.*
