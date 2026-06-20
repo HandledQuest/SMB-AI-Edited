@@ -1,6 +1,6 @@
 # SimpleMusicBot (Refactored)
 
-py-cord製のDiscord音楽Bot。[HandledQuest/SimpleMusicBot](https://github.com/HandledQuest/SimpleMusicBot) をベースに、マルチサーバー対応・非同期化・セキュリティ強化を中心とした大規模リファクタを行ったものです。
+py-cord製のDiscord音楽Bot。[HandledQuest/SimpleMusicBot](https://github.com/HandledQuest/SimpleMusicBot) をベースに、マルチサーバー対応・非同期化・セキュリティ強化を中心とした大規模リファクタを行ったものです。本リポジトリ([HandledQuest/SMB-AI-Edited](https://github.com/HandledQuest/SMB-AI-Edited))でリファクタ後のコードを管理しています。
 
 ## 主な特徴
 
@@ -36,8 +36,8 @@ py-cord製のDiscord音楽Bot。[HandledQuest/SimpleMusicBot](https://github.com
 ### 2. インストール
 
 ```bash
-git clone https://github.com/HandledQuest/SimpleMusicBot.git
-cd SimpleMusicBot
+git clone https://github.com/HandledQuest/SMB-AI-Edited.git
+cd SMB-AI-Edited
 pip install -r requirements.txt
 ```
 
