@@ -34,13 +34,13 @@ def build_bot(settings) -> discord.Bot:
         await bot.change_presence(activity=discord.Game(name=settings.status))
 
         if settings.update_check:
-            latest = await check_for_update(settings.repository_url)
-            if latest and is_newer(latest):
+            release = await check_for_update(settings.repository_url)
+            if release and is_newer(release.tag_name):
                 logger.warning(
                     "新しいバージョン %s が利用可能です。"
-                    "リポジトリを確認してください: %s",
-                    latest,
-                    settings.repository_url,
+                    "リリースページを確認してください: %s",
+                    release.tag_name,
+                    release.html_url,
                 )
 
     @bot.event

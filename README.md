@@ -104,6 +104,13 @@ pytest tests/ -v
 └── .gitignore
 ```
 
+## アップデート通知
+
+起動時(`on_ready`)に [HandledQuest/SMB-AI-Edited](https://github.com/HandledQuest/SMB-AI-Edited) の GitHub Releases を確認し、現在のバージョン(`update.py`の`CURRENT_VERSION`)より新しいタグが公開されていればログに警告として出力します。
+
+- 不要な場合は `.env` で `UPDATE_CHECK=false` に設定してください。
+- リポジトリにまだリリースが存在しない場合や、GitHub APIのレート制限(認証なしで60回/時)に達した場合は、エラーにはせず静かにスキップします。
+
 ## トラブルシューティング
 
 - **`MissingVoiceDependenciesError` が出る**: `pip install "py-cord[voice]"` でボイス関連の依存(PyNaCl等)を導入してください。

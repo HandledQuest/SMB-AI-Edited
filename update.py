@@ -8,16 +8,24 @@
 from __future__ import annotations
 
 import logging
+from dataclasses import dataclass
 
 import aiohttp
 
 logger = logging.getLogger(__name__)
 
-CURRENT_VERSION = "0.0.1"
+CURRENT_VERSION = "2.0.0"
 
 
-async def check_for_update(repository_api_url: str) -> str | None:
-    """最新リリースのタグ名を返す。取得できない場合は None。"""
+@dataclass(frozen=True)
+class ReleaseInfo:
+    tag_name: str
+    html_url: str
+    published_at: str | None = None
+
+
+async def check_for_update(repository_api_url: str) -> ReleaseInfo | None:
+    """最新リリースの情報を返す。取得できない場合は None。"""
     url = repository_api_url.rstrip("/") + "/releases/latest"
     try:
         async with aiohttp.ClientSession() as session:
@@ -25,6 +33,12 @@ async def check_for_update(repository_api_url: str) -> str | None:
                 if resp.status == 403:
                     logger.warning(
                         "GitHub APIのレート制限に達したため、更新チェックをスキップします。"
+                    )
+                    return None
+                if resp.status == 404:
+                    logger.info(
+                        "リポジトリにリリースがまだ存在しません(%s)。更新チェックをスキップします。",
+                        repository_api_url,
                     )
                     return None
                 if resp.status != 200:
@@ -44,7 +58,12 @@ async def check_for_update(repository_api_url: str) -> str | None:
     if tag_name is None:
         logger.warning("更新チェックのレスポンスに tag_name が含まれていません。")
         return None
-    return tag_name
+
+    return ReleaseInfo(
+        tag_name=tag_name,
+        html_url=data.get("html_url", repository_api_url),
+        published_at=data.get("published_at"),
+    )
 
 
 def is_newer(latest_tag: str, current: str = CURRENT_VERSION) -> bool:
